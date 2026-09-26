@@ -1,0 +1,64 @@
+/* Portable extras — a thin layer on top of the site's own stylesheet.
+   Only what a static copy needs: the intro flash guard, the catalogue fan
+   fallback, and making sure JS-revealed panels start hidden. */
+
+/* Set on <html> before first paint for returning visitors, so the intro
+   curtain never paints at all. */
+html.nm-intro-off .nm-intro {
+  display: none !important;
+}
+
+/* Panels that portable.js reveals — hidden until it does. */
+.nm-tour-bar[hidden],
+.nm-tour-end[hidden],
+.nm-lightbox[hidden] {
+  display: none !important;
+}
+
+/* The catalogue fan's geometry is computed by the app at runtime. Without it the
+   pages would stack on top of one another, so present them as a readable
+   horizontal strip instead — pages keep their proportions, never cropped. */
+.nm-cat-stage {
+  display: flex !important;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 14px 2px;
+  scrollbar-width: thin;
+}
+
+.nm-cat-page {
+  position: static !important;
+  transform: none !important;
+  opacity: 1 !important;
+  flex: 0 0 auto;
+  height: 340px;
+  width: auto;
+  cursor: pointer;
+}
+
+.nm-cat-page.is-front {
+  outline: 2px solid #8e2428;
+  outline-offset: 2px;
+}
+
+@media (max-width: 700px) {
+  .nm-cat-page {
+    height: 240px;
+  }
+}
+
+/* The build marker — provenance, so a copy can be traced to its source. */
+.portable-note {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 26px clamp(16px, 4vw, 48px) 40px;
+  border-top: 1px solid rgb(255 255 255 / 0.09);
+  color: #b3ab9c;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+
+.portable-note a {
+  color: #cfc9bd;
+}
